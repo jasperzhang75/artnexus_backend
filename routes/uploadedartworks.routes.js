@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET a specific uploaded artwork
-router.get('/uploadedartworks/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
       const artwork = await UploadedArtwork.findById(req.params.id);
       if (!artwork) {
@@ -30,7 +30,7 @@ router.get('/uploadedartworks/:id', async (req, res) => {
   
 
 // POST create a new uploaded artwork
-router.post('/uploadedartworks', isAuth, isArtist, async (req, res) => {
+router.post('/', isAuth, isArtist, async (req, res) => {
     try {
       const { title, description, date_start, artist_title, price, imageUrl } = req.body;
       if (!title || !date_start || !artist_title || !price || !imageUrl) {
@@ -53,7 +53,7 @@ router.post('/uploadedartworks', isAuth, isArtist, async (req, res) => {
   });
 
 // DELETE an uploaded artwork
-router.delete('/uploadedartworks/:id', isAuth, isArtist, async (req, res) => {
+router.delete('/:id', isAuth, isArtist, async (req, res) => {
     try {
       const artwork = await UploadedArtwork.findByIdAndDelete(req.params.id);
       if (!artwork) {
@@ -66,7 +66,7 @@ router.delete('/uploadedartworks/:id', isAuth, isArtist, async (req, res) => {
   });
   
   // PUT modify an uploaded artwork
-  router.put('/uploadedartworks/:id', isAuth, isArtist, async (req, res) => {
+  router.put('/:id', isAuth, isArtist, async (req, res) => {
     try {
       const { title, description, date_start, artist_title, price, imageUrl } = req.body;
       if (!title || !description || !date_start || !artist_title || !price || !imageUrl) {
@@ -87,7 +87,7 @@ router.delete('/uploadedartworks/:id', isAuth, isArtist, async (req, res) => {
   });
   
   // GET wishlist status of an uploaded artwork
-router.get('/uploadedartworks/:id/wish', isAuth, async (req, res) => {
+router.get('/:id/wish', isAuth, async (req, res) => {
     try {
       const wish = await Wish.findOne({ user: req.userId, artwork: req.params.id });
       res.json({ isWished: !!wish });

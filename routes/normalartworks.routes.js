@@ -16,12 +16,16 @@ router.get('/', async (req, res) => {
 });
 
 // GET a specific normal artwork
-router.get('/normalartworks/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
       const artwork = await NormalArtwork.findById(req.params.id);
       if (!artwork) {
         return res.status(404).json({ error: 'Artwork not found' });
       }
+
+
+
+
       res.json(artwork);
     } catch (error) {
       res.status(500).json({ error: 'Error fetching artwork' });
@@ -29,7 +33,7 @@ router.get('/normalartworks/:id', async (req, res) => {
   });
   
   // GET favourite status of a normal artwork
-  router.get('/normalartworks/:id/favourite', isAuth, async (req, res) => {
+  router.get('/:id/favourite', isAuth, async (req, res) => {
     try {
       const favourite = await Favourite.findOne({ user: req.userId, artwork: req.params.id });
       res.json({ isFavourite: !!favourite });
@@ -53,9 +57,9 @@ router.post('/:id/favourite', isAuth, async (req, res) => {
 });
 
 // GET comments of a normal artwork
-router.get('/normalartworks/:id/comment', isAuth, async (req, res) => {
+router.get('/:id/comment', isAuth, async (req, res) => {
     try {
-      const comments = await Comment.find({ artwork: req.params.id });
+      const comments = await Comment.findOne({ artwork: req.params.id });
       res.json(comments);
     } catch (error) {
       res.status(500).json({ error: 'Error fetching comments' });

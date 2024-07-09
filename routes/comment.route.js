@@ -7,8 +7,8 @@ const isAuth = require('../middlewares/isAuthenticated');
 router.put('/:id', isAuth, async (req, res) => {
   try {
     const { content } = req.body;
-    const comment = await Comment.findByIdAndUpdate(
-      req.params.id,
+    const comment = await Comment.findOneAndUpdate(
+      {artwork: req.params.id},
       { content },
       { new: true }
     );

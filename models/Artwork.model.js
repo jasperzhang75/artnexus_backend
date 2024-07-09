@@ -60,11 +60,6 @@ const NormalArtwork = Artwork.discriminator(
       type: Number,
       required: [true, "Date_end is required."],
     },
-    
-    id: {
-      type: Number,
-      required: [true, "ID is required."],
-    },
     image_id: {
       type: String,
       required: [true, "Image ID is required."],
