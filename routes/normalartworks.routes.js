@@ -59,7 +59,7 @@ router.post('/:id/favourite', isAuth, async (req, res) => {
 // GET comments of a normal artwork
 router.get('/:id/comment', isAuth, async (req, res) => {
     try {
-      const comments = await Comment.findOne({ artwork: req.params.id });
+      const comments = await Comment.findOne({ creator: req.userId ,artwork: req.params.id });
       res.json(comments);
     } catch (error) {
       res.status(500).json({ error: 'Error fetching comments' });

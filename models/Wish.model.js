@@ -7,7 +7,7 @@ const wishSchema = new Schema({
     },
     artwork: {
         type: Schema.Types.ObjectId,
-        ref: 'uploadedArtwork'
+        ref: 'UploadedArtwork'
     },
    
 }, {

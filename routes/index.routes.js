@@ -8,7 +8,7 @@ router.use("/comment", require("../routes/comment.route.js"))
 router.use("/favourite", require("../routes/favourite.routes.js"))
 router.use("/uploadedartworks", require("../routes/uploadedartworks.routes.js"))
 router.use("/wish", require("../routes/wish.routes.js"))
-
+router.use("/order", require("../routes/order.routes.js"))
 
 
 module.exports = router;

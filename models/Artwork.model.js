@@ -16,7 +16,7 @@ const artworkSchema = new Schema(
     artist_title: {
         type: String,
         required: [true, "Title is required."],
-      }
+      },
   },
 
   {

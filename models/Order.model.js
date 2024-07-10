@@ -6,18 +6,22 @@ const orderSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    artwork: {
-        type: Schema.Types.ObjectId,
-        ref: 'uploadedArtwork'
-    },
-    isAdded: {
-        type: Boolean,
-        default: false
-    },
-    isPurchased: {
-        type: Boolean,
-        default: false
-    },
+    artworks:  [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'UploadedArtwork',
+          required: true,
+        }
+      ],
+      status: {
+        type: String,
+        enum: ['pending', 'purchased'],
+        default: 'pending',
+      },
+      purchasedAt: {
+        type: Date,
+        default: Date.now,
+      },
 
 }, {
     timestamps: true

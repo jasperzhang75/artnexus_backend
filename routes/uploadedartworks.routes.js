@@ -69,7 +69,7 @@ router.delete('/:id', isAuth, isArtist, async (req, res) => {
   router.put('/:id', isAuth, isArtist, async (req, res) => {
     try {
       const { title, description, date_start, artist_title, price, imageUrl } = req.body;
-      if (!title || !description || !date_start || !artist_title || !price || !imageUrl) {
+      if (!title || !date_start || !artist_title || !price || !imageUrl) {
         return res.status(400).json({ error: 'All fields are required' });
       }
       const artwork = await UploadedArtwork.findByIdAndUpdate(

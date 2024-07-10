@@ -8,7 +8,7 @@ const SALT = 12
 
 router.post("/signup", async (req, res, next) => {
 	try {
-		const { username, email, password,firstname,lastname } = req.body
+		const { username, email, password,firstname,lastname, isArtist } = req.body
 		if (!username || !email || !password) {
 			return res
 				.status(400)
@@ -46,6 +46,7 @@ router.post("/signup", async (req, res, next) => {
 			username,
 			email,
 			password: hashedPassword,
+			isArtist,
 		})
 
 		res.status(201).json({

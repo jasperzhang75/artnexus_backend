@@ -6,7 +6,10 @@ const isAuth = require('../middlewares/isAuthenticated');
 // DELETE remove an item from the wishlist
 router.delete('/:id', isAuth, async (req, res) => {
   try {
-    const result = await Wish.findByIdAndDelete(req.params.id);
+    const result = await Wish.findOneAndDelete({
+      user: req.userId,
+      artwork: req.params.id,
+    });
     if (!result) {
       return res.status(404).json({ error: 'Wish not found' });
     }
@@ -16,4 +19,12 @@ router.delete('/:id', isAuth, async (req, res) => {
   }
 });
 
+router.get('/', isAuth, async (req, res) => {
+  try {
+    const wishlist = await Wish.find({ user: req.userId }).populate('artwork');
+    res.status(200).json(wishlist);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching wishlist artworks' });
+  }
+});
 module.exports = router;
